@@ -2,13 +2,23 @@ import React, { Component } from 'react'
 
 export class Navigation extends Component {
   render() {
-    return (
-      <div>
+    if (this.props.isSignedIn) {
+      return (
         <nav style={{ display: 'flex', justifyContent: 'flex-end'}}>
-          <p className='f3 link dim black underline pa3 pointer'>Sign Out</p>
+          <p onClick={ () => this.props.onRouteChange('signout') } 
+            className='f3 link dim black underline pa3 pointer'>Sign Out</p>
         </nav>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <nav style={{ display: 'flex', justifyContent: 'flex-end'}}>
+          <p onClick={ () => this.props.onRouteChange('signin') } 
+            className='f3 link dim black underline pa3 pointer'>Sign In</p>
+          <p onClick={ () => this.props.onRouteChange('register') } 
+            className='f3 link dim black underline pa3 pointer'>Register</p>
+        </nav>
+      )
+    }
   }
 }
 

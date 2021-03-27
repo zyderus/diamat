@@ -1,6 +1,9 @@
 // import express from 'express'
+const bcrypt = require('bcrypt')
+const cors = require('cors')
 const express = require('express')
 const app = express()
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // app.use(express.static(__dirname + '/public'))
@@ -45,6 +48,11 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { email, name, password } = req.body
+  const saltRounds = 5
+  bcrypt.hash(password, saltRounds).then(function(hash) {
+    // Store hash in your password DB.
+    console.log(hash)
+  }); 
   database.users.push({
     id: '135',
     name: req.body.name,
