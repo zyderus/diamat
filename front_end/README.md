@@ -1,5 +1,5 @@
 # Face Recognition
-dev_branch
+dev_branch in use now
 
 
 This is to test face recognition api in React frontend
