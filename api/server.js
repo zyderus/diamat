@@ -13,7 +13,7 @@ const database = {
     {
       id: '123',
       name: 'Tom',
-      email: 'rus@mail.com',
+      email: 'asdf',
       password: 'asdf1234',
       entries: 0,
       joined: new Date()
@@ -42,7 +42,7 @@ app.post('/signin', (req, res) => {
     && req.body.password === database.users[0].password) {
       res.json('success')
     } else {
-      res.status(400).json({name: 'Que', job: 'Fisker'})
+      res.status(400).json('Your credentials are incorrect')
     }
 })
 
@@ -55,13 +55,13 @@ app.post('/register', (req, res) => {
   }); 
   database.users.push({
     id: '135',
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
+    name: name,
+    email: email,
+    password: password,
     entries: 0,
     joined: new Date()
   })
-  res.json(database)
+  res.json(database.users[database.users.length - 1])
 })
 
 app.get('/profile/:id', (req, res) => {
