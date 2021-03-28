@@ -57,8 +57,7 @@ app.post('/register', (req, res) => {
     id: '135',
     name: name,
     email: email,
-    password: password,
-    entries: 0,
+    entries: 8,
     joined: new Date()
   })
   res.json(database.users[database.users.length - 1])

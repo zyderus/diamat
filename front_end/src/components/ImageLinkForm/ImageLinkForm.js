@@ -6,7 +6,7 @@ export class ImageLinkForm extends Component {
     return (
       <div>
         <p className="f3">
-          {'This Magic Brain will detect faces in your pictures. Git it a try'}
+          {'This Magic Brain will detect faces in your pictures. Try it'}
         </p>
         <div className='w-80 center'>
           <div className='form pa4 br3 shadow-5'>

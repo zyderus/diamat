@@ -34,7 +34,7 @@ class App extends Component {
         id: '',
         name: '',
         email: '',
-        entries: 0,
+        entries: 8,
         joined: ''
       }
     }
@@ -81,14 +81,14 @@ class App extends Component {
         { this.state.route === 'home'
           ? <div>
               <Logo />
-              <Rank />
+              <Rank name={this.state.user.name} entries={this.state.user.entries} />
               {/* <p>{this.state.user}</p> */}
               <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit} />
               <FaceRecognition />
             </div>
           : this.state.route === 'register'
           ? <Register onRouteChange={ this.onRouteChange } loadUser={ this.loadUser }/>
-          : <Signin onRouteChange={ this.onRouteChange }/>
+          : <Signin onRouteChange={ this.onRouteChange } loadUser={ this.loadUser }/>
         }
       </div>
     );
