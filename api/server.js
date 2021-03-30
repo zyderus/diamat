@@ -7,6 +7,19 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // app.use(express.static(__dirname + '/public'))
+const knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : 'kupola77',
+    database : 'smartbrain'
+  }
+});
+
+knex.select().from('users').then(data => {
+  console.log(data)
+})
 
 const database = {
   users: [
@@ -61,14 +74,18 @@ app.post('/register', (req, res) => {
     // Store hash in your password DB.
     console.log(hash)
   }); 
-  database.users.push({
-    id: '135',
-    name: name,
+
+  knex('users')
+  .returning('*')
+  .insert({
     email: email,
-    entries: 8,
+    name: name,
     joined: new Date()
   })
-  res.json(database.users[database.users.length - 1])
+  .then(user => {
+    res.json(user[0])
+  })
+  .catch(err => res.status(400).json('Unable to register. ' + err.detail))
 })
 
 app.get('/profile/:id', (req, res) => {
@@ -95,8 +112,6 @@ app.put('/image', (req, res) => {
   })
   if (!found) res.status(400).json('user not found')
 })
-
-
 
 app.listen(3000, () => console.log('Server is on port 3000'))
 
