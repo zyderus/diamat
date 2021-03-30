@@ -26,12 +26,20 @@ const database = {
       entries: 0,
       joined: new Date()
     },
+    {
+      id: '2 2',
+      name: 'Li z',
+      email: 'liz@@mail.com',
+      password: 'asdf12344',
+      entries: 'a',
+      joined: 'date'
+    }
   ]
 }
 
-// app.get('/test', (req, res) => {
-//   res.sendFile('index.html')
-// })
+app.get('/test', (req, res) => {
+  res.json(req.body)
+})
 
 app.get('/', (req, res) => {
   res.json(database.users)

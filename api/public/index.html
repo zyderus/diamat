@@ -8,5 +8,20 @@
 </head>
 <body>
   <h1>Hello</h1>
+
+  <button onclick="chekx">Click to test</button>
+
+  <script>
+    const chekx = () => {
+      fetch('http://localhost:3000/test', {
+        method: 'get',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({
+          name: 'testName',
+          pw: 'asdf1234'
+        })
+      })
+    }
+  </script>
 </body>
 </html>
