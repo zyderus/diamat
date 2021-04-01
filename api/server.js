@@ -17,81 +17,19 @@ const knex = require('knex')({
   }
 });
 
-// knex.select().from('users').then(data => {
-//   console.log(data)
-// })
+const register = require('./controllers/register')
+const signin = require('./controllers/signin')
+const profile = require('./controllers/profile')
+const image = require('./controllers/image')
+// knex.select().from('users').then(data => console.log(data))
 
-app.get('/test', (req, res) => {
-  res.json(req.body)
-})
-
-app.get('/', (req, res) => {
-  res.json('HOMEPAGE')
-})
-
-app.post('/signin', (req, res) => {
-  knex.select('email', 'hash').from('login')
-  .where('email', '=', req.body.email)
-  .then(async data => {
-    const isValid = await bcrypt.compare(req.body.password, data[0].hash)
-    if (isValid) {
-      knex.select().from('users')
-        .where('email', '=', req.body.email)
-        .then(user => res.json(user[0]))
-        .catch(err => res.status(400).json('Unable to get user', err.message))
-    } else {
-      res.status(400).json('Wrong credentials')
-    }
-  })
-  .catch(err => res.status(400).json('Wrong Credentials'))
-})
-
-app.post('/register', async (req, res) => {
-  const { email, name, password } = req.body
-  const saltRounds = 5
-  const hash = await bcrypt.hash(password, saltRounds)
-  await knex.transaction(trx => {
-    trx.insert ({
-      hash: hash,
-      email: email
-    })
-    .into('login')
-    .returning('email')
-    .then(loginEmail => {
-      trx('users')
-      .returning('*')
-      .insert({
-        email: loginEmail[0],
-        name: name,
-        joined: new Date()
-      })
-      .then(user => res.json(user[0]))
-    })
-    .then(trx.commit)
-    .catch(trx.rollback)
-  })
-  .catch(err => res.status(400).json('Unable to register. ' + err.detail))
-})
-
-app.get('/profile/:id', (req, res) => {
-  const { id } = req.params
-  knex.select().from('users').where({ id }).then(user => {
-    user.length ? res.json(user[0]) : res.status(400).json('Error: User doesn\'t exist')
-  })
-  .catch(err => res.status(400).json('Error: Request errors'))
-})
-
-app.put('/image', (req, res) => {
-  const { id } = req.body
-  knex('users').where('id', '=', id).increment('entries', 1)
-  .returning('entries')
-  .then(entries => res.json(entries[0]))
-  .catch(err => res.status(400).json('ERROR: Entries request errors'))
-})
-
+app.get('/test', (req, res) => { res.json(req.body) })
+app.get('/', (req, res) => { res.json('HOMEPAGE') })
+app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt) })
+app.post('/register', (req, res) => { register.handleRegister(req, res, knex, bcrypt) })
+app.get('/profile/:id', (req, res) => { profile.handleProfile(req, res, knex) })
+app.put('/image', (req, res) => { image.handleImage(req, res, knex) })
 app.listen(3000, () => console.log('Server is on port 3000'))
-
-
 
 // const mongoose = require('mongoose');
 // const MONGODB_URL = 'Your MongoDB URL';
