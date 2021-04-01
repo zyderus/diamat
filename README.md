@@ -1,4 +1,6 @@
 # Diamat
+Open [https://diamat-front-react.herokuapp.com/](http://localhost:3000) to view it in the browser.
+
 
 View a collection of stereoscopic still and motion images
 
