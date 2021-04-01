@@ -1,0 +1,1 @@
+export const localhost = 'https://diamat-back-node.herokuapp.com'

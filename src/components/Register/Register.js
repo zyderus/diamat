@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { localhost } from '../../config'
 
 class Register extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Register extends Component {
   }
 
   onSubmitSignin = () => {
-    fetch('http://localhost:3000/register', {
+    fetch(`${localhost}/register`, {
       method: 'post',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({

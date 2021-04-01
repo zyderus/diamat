@@ -56,7 +56,7 @@ class App extends Component {
   }
 
   // componentDidMount = () => {
-  //   fetch('http://localhost:3000/')
+  //   fetch(localhost)
   //     .then(res => res.json())
   //     .then(console.log)
   // }
