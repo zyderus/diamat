@@ -1,8 +1,6 @@
-# Face Recognition
-dev_branch in use now
+# Diamat
 
-
-This is to test face recognition api in React frontend
+View a collection of stereoscopic still and motion images
 
 ## Available Scripts
 
