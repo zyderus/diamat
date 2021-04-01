@@ -16,6 +16,7 @@ const knex = require('knex')({
     database : 'smartbrain'
   }
 });
+const PORT = process.env.PORT || 3000
 
 const register = require('./controllers/register')
 const signin = require('./controllers/signin')
@@ -29,7 +30,7 @@ app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt) 
 app.post('/register', (req, res) => { register.handleRegister(req, res, knex, bcrypt) })
 app.get('/profile/:id', (req, res) => { profile.handleProfile(req, res, knex) })
 app.put('/image', (req, res) => { image.handleImage(req, res, knex) })
-app.listen(3000, () => console.log('Server is on port 3000'))
+app.listen(PORT, () => console.log(`Server is on port ${PORT}`))
 
 // const mongoose = require('mongoose');
 // const MONGODB_URL = 'Your MongoDB URL';
