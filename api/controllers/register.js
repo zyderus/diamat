@@ -1,5 +1,8 @@
 const handleRegister = async (req, res, knex, bcrypt) => {
   const { email, name, password } = req.body
+  if (!email || !name || !password) {
+    return res.status(400).json('Invalid data submitted')
+  }
   const saltRounds = 5
   const hash = await bcrypt.hash(password, saltRounds)
   await knex.transaction(trx => {
