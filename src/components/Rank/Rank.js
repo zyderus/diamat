@@ -6,7 +6,7 @@ export class Rank extends Component {
     return (
       <div>
         <div className="white f3">
-          {`${name}, your current rank is...`}
+          {`${name}, click to increase`}
         </div>
         <div className="white f1">
           {entries}

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import './ImageLinkForm.css'
 
 export class ImageLinkForm extends Component {
   render() {
     return (
       <div>
         <p className="f3">
-          {'This Magic Brain will detect faces in your pictures. Try it'}
+          {'Call to action'}
         </p>
         <div className='w-80 center'>
           <div className='form pa4 br3 shadow-5'>
